@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:firebase_remote_config_example/home_page.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +14,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await FirebaseRemoteConfig.instance.fetchAndActivate();
   runApp(const RemoteConfigApp());
 }
 

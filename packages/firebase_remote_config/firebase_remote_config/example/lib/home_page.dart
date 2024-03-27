@@ -17,6 +17,23 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   StreamSubscription? subscription;
   RemoteConfigUpdate? update;
+  StreamSubscription? subscription1;
+
+  @override
+  void initState() {
+    super.initState();
+    final remoteConfig = FirebaseRemoteConfig.instance;
+    subscription1 = remoteConfig.onConfigUpdated.listen((event) {
+      print('event: ${event.updatedKeys}');
+    });
+  }
+
+  @override
+  void dispose() {
+    subscription1?.cancel();
+    print('sub dispose');
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +43,22 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Column(
         children: [
+          ElevatedButton(
+            onPressed: () {
+              final remoteConfig = FirebaseRemoteConfig.instance;
+              subscription1 = remoteConfig.onConfigUpdated.listen((event) {
+                print('event button: ${event.updatedKeys}');
+              });
+            },
+            child: const Text('subscribe'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              subscription1?.cancel();
+              print('sub from button dispose');
+            },
+            child: const Text('clear'),
+          ),
           _ButtonAndText(
             defaultText: 'Not initialized',
             buttonText: 'Initialize',
