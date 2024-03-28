@@ -261,7 +261,7 @@ auth_interop.AuthProvider convertPlatformAuthProvider(
     return oAuthProvider;
   }
 
-  throw FallThroughError();
+  throw UnsupportedError('Unknown authProvider value');
 }
 
 /// Converts a [auth_interop.AuthCredential] into a [AuthCredential].

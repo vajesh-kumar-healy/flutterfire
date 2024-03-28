@@ -103,7 +103,7 @@ class FirebaseList extends ListBase<DataSnapshot>
       }
     }
 
-    throw FallThroughError();
+    throw UnsupportedError('Unknown index');
   }
 
   void _onChildAdded(DatabaseEvent event) {

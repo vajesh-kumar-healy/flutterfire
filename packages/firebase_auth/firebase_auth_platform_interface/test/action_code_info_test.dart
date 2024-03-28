@@ -109,16 +109,6 @@ void main() {
         expect(testActionCodeInfo.operation,
             equals(ActionCodeInfoOperation.verifyEmail));
       });
-
-      test(
-          'throws a [FallThroughError] when operation does not match a known type',
-          () {
-        ActionCodeInfo testActionCodeInfo =
-            ActionCodeInfo(operation: -1, data: kMockData);
-
-        expect(() => testActionCodeInfo.operation,
-            throwsA(isA<FallThroughError>()));
-      });
     });
   });
 }
